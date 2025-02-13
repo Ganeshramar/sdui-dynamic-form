@@ -1,0 +1,45 @@
+@if (formConfig) {
+    <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+      <h2>{{ formConfig.title }}</h2>
+
+      @for (field of formConfig.fields; track field.name) {
+        <div class="form-field">
+          <label>{{ field.label }}</label>
+
+          @switch (field.type) {
+            @case ('text') {
+              <input type="text" [formControlName]="field.name" [placeholder]="field.label">
+            }
+            @case ('number') {
+              <input type="number" [formControlName]="field.name" [placeholder]="field.label">
+            }
+            @case ('select') {
+              <select [formControlName]="field.name">
+                @for (option of field.options; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+            }
+            @case ('checkbox') {
+              <input type="checkbox" [formControlName]="field.name">
+            }
+          }
+
+          @if (
+            dynamicForm.get(field.name)?.invalid && 
+            (dynamicForm.get(field.name)?.dirty || dynamicForm.get(field.name)?.touched)
+          ) {
+            <div class="error-message">
+              Validation failed for {{ field.label }}
+            </div>
+          }
+        </div>
+      }
+
+      <button type="submit" [disabled]="dynamicForm.invalid">
+        {{ formConfig.submitLabel }}
+      </button>
+    </form>
+  } @else {
+    <p>Loading form...</p>
+  }

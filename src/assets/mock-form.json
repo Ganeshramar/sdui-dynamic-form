@@ -1,0 +1,32 @@
+{
+    "title": "User Registration",
+    "submitLabel": "Register",
+    "fields": [
+      {
+        "type": "text",
+        "name": "username",
+        "label": "Username",
+        "validators": { "required": true, "minLength": 3, "maxLength": 20 }
+      },
+      {
+        "type": "text",
+        "name": "email",
+        "label": "Email Address",
+        "validators": { "required": true }
+      },
+      {
+        "type": "select",
+        "name": "country",
+        "label": "Country",
+        "options": [
+          { "value": "us", "label": "United States" },
+          { "value": "ca", "label": "Canada" },
+          { "value": "inr", "label": "India" },
+          { "value": "chi", "label": "China" },
+          { "value": "ru", "label": "Russia" },
+          { "value": "fr", "label": "France" }
+        ]
+      }
+    ]
+  }
+  
